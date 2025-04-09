@@ -41,11 +41,13 @@ export default function ImageGallery() {
       }
 
       const data = await res.json();
-
+      console.log(data);
       if (reset) {
         setImages(data.images);
       } else {
-        setImages((prev) => [...prev, ...data.images]);
+        setImages(data.images);
+
+        // setImages((prev) => [...prev, ...data.images]);
       }
 
       setHasMore(data.hasMore);
@@ -86,9 +88,10 @@ export default function ImageGallery() {
 
   const handleUploadSuccess = () => {
     setUploadOpen(false);
-    fetchImages(1, true);
+    setTimeout(() => {
+      fetchImages(1, true);
+    }, 2000);
   };
-
   const handleImageClick = (image: ImageType) => {
     setSelectedImage(image);
   };
