@@ -1,6 +1,5 @@
 'use client';
 import { AppBar, Toolbar, Typography, Container, Box } from '@mui/material';
-import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Header() {
