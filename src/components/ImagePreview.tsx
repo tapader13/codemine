@@ -28,12 +28,12 @@ export default function ImagePreview({
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
   if (!image) return null;
-
+  console.log(image);
   return (
     <Dialog
       open={open}
       onClose={onClose}
-      maxWidth='lg'
+      maxWidth='md'
       fullWidth
       fullScreen={fullScreen}
     >
@@ -55,7 +55,7 @@ export default function ImagePreview({
         <CloseIcon />
       </IconButton>
 
-      <DialogContent sx={{ p: 0, overflow: 'hidden', bgcolor: 'black' }}>
+      <DialogContent sx={{ p: 0, overflow: 'hidden', bgcolor: 'white' }}>
         <Box sx={{ position: 'relative', width: '100%', height: '80vh' }}>
           <Image
             src={image.url || '/placeholder.svg'}

@@ -105,9 +105,13 @@ export default function ImageGallery() {
     if (!imageToDelete) return;
 
     try {
-      const res = await fetch(`/api/images/${imageToDelete.id}`, {
-        method: 'DELETE',
-      });
+      console.log('imageToDelete', imageToDelete);
+      const res = await fetch(
+        `/api/images/${imageToDelete.id.split('/').pop()}`,
+        {
+          method: 'DELETE',
+        }
+      );
 
       if (!res.ok) {
         throw new Error('Failed to delete image');
