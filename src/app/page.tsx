@@ -1,4 +1,5 @@
-import { Container, Typography } from "@mui/material";
+import ImageGallery from '@/components/ImageGallery';
+import { Container, Typography } from '@mui/material';
 
 export default function Home() {
   return (
