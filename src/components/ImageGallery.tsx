@@ -12,11 +12,11 @@ import {
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import SearchIcon from '@mui/icons-material/Search';
 import ImageCard from './ImageCard';
-import ImageUpload from './ImageUpload';
 import ImagePreview from './ImagePreview';
-import DeleteConfirmation from './DeleteConfirmation';
-import InfiniteScroll from './InfiniteScroll';
 import type { ImageType } from '@/types/image';
+import InfiniteScroll from './InfiniteScroll';
+import ImageUpload from './ImageUpload';
+import DeleteConfirmation from './DeleteConfirmation';
 
 export default function ImageGallery() {
   const [images, setImages] = useState<ImageType[]>([]);
@@ -173,7 +173,7 @@ export default function ImageGallery() {
             </Typography>
           ) : (
             <Typography align='center' sx={{ my: 4 }}>
-              You've reached the end!
+              You&apos;ve reached the end!
             </Typography>
           )
         }
