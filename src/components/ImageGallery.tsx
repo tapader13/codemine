@@ -1,7 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Grid from '@mui/material/Grid';
+
 import {
-  Grid,
   Box,
   Button,
   Typography,
@@ -33,9 +34,10 @@ export default function ImageGallery() {
 
   const fetchImages = async (pageNum = 1, reset = false) => {
     try {
+      // if (loading) return;
       setLoading(true);
       const res = await fetch(`/api/images?page=${pageNum}&limit=12`);
-
+      console.log(res);
       if (!res.ok) {
         throw new Error('Failed to fetch images');
       }
@@ -185,9 +187,9 @@ export default function ImageGallery() {
           )
         }
       >
-        <Grid container spacing={3}>
+        <Grid container rowSpacing={2} columnSpacing={2}>
           {filteredImages.map((image) => (
-            <Grid item key={image.id} xs={12} sm={6} md={4} lg={3}>
+            <Grid key={image.id} size={{ xs: 12, md: 6, lg: 4 }}>
               <ImageCard
                 image={image}
                 onImageClick={() => handleImageClick(image)}
