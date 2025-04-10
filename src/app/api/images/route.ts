@@ -12,11 +12,12 @@ export async function GET(request: NextRequest) {
       .sort_by('created_at', 'desc')
       .max_results(limit * page)
       .execute();
-
+    console.log('result', result, page, limit);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const images = result.resources.map((resource: any) => ({
       id: resource.public_id,
       url: resource.secure_url,
-      title: resource.context?.title || resource.public_id.split('/').pop(),
+      title: resource.display_name || resource.public_id.split('/').pop(),
       tags: resource.tags || [],
       createdAt: resource.created_at,
     }));
