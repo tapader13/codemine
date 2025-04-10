@@ -1,4 +1,4 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import cloudinary from '@/lib/cloudinary';
 
 export async function POST(request: NextRequest) {
@@ -12,7 +12,6 @@ export async function POST(request: NextRequest) {
     if (!file) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
-
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
@@ -23,16 +22,16 @@ export async function POST(request: NextRequest) {
           resource_type: 'image',
           tags: tags,
           context: title ? `title=${title}` : undefined,
+          display_name: title || undefined,
         },
         (error, result) => {
           if (error) reject(error);
           else resolve(result);
         }
       );
-
       uploadStream.end(buffer);
     });
-
+    console.log('result', result);
     return NextResponse.json(result);
   } catch (error) {
     console.error('Error uploading image:', error);

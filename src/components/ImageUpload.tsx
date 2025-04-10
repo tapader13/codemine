@@ -126,7 +126,7 @@ export default function ImageUpload({
         formData.append('file', img.file);
         formData.append('title', img.title);
         formData.append('tags', JSON.stringify(img.tags));
-
+        console.log(`formData`, formData, img.file, img.title, img.tags);
         const res = await fetch('/api/upload', {
           method: 'POST',
           body: formData,
@@ -138,7 +138,7 @@ export default function ImageUpload({
 
         return await res.json();
       });
-
+      console.log(`uploadPromises`, uploadPromises);
       await Promise.all(uploadPromises);
 
       // Clean up previews
@@ -213,7 +213,7 @@ export default function ImageUpload({
 
         {images.length > 0 ? (
           <Grid container spacing={2}>
-            <Grid item xs={12} md={7}>
+            <Grid size={{ xs: 12, md: 7 }}>
               <Box
                 sx={{
                   position: 'relative',
@@ -282,7 +282,7 @@ export default function ImageUpload({
               </Box>
             </Grid>
 
-            <Grid item xs={12} md={5}>
+            <Grid size={{ xs: 12, md: 5 }}>
               <Typography variant='subtitle1' gutterBottom>
                 Image Details
               </Typography>
