@@ -29,7 +29,7 @@ export default function ThemeRegistry({
     cache.compat = true;
     const prevInsert = cache.insert;
     let inserted: string[] = [];
-    cache.insert = (...args: any) => {
+    cache.insert = (...args) => {
       const serialized = args[1];
       if (cache.inserted[serialized.name] === undefined) {
         inserted.push(serialized.name);
