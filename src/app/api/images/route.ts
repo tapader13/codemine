@@ -5,14 +5,12 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const page = Number.parseInt(searchParams.get('page') || '1');
   const limit = Number.parseInt(searchParams.get('limit') || '12');
-  const offset = (page - 1) * limit;
 
   try {
     const result = await cloudinary.search
       .expression('resource_type:image AND folder=gallery')
       .sort_by('created_at', 'desc')
-      .max_results(limit)
-      .next_cursor(offset > 0 ? `${offset}` : undefined)
+      .max_results(limit * page)
       .execute();
 
     const images = result.resources.map((resource: any) => ({
@@ -23,9 +21,12 @@ export async function GET(request: NextRequest) {
       createdAt: resource.created_at,
     }));
 
+    const hasMore = result.total_count > page * limit;
+    console.log('hasMore', hasMore, result.total_count, page * limit);
+    console.log('images', images, page, limit);
     return NextResponse.json({
       images,
-      hasMore: result.total_count > offset + limit,
+      hasMore,
       total: result.total_count,
     });
   } catch (error) {
